@@ -3,7 +3,6 @@
 #© 2025 - do not redistribute
 #----------------------------
 
-
 from turtle import Screen, Turtle
 from time import sleep
 import re
@@ -13,7 +12,7 @@ from tkinter.messagebox import showinfo
 
 screen = Screen()
 screen.setup(width=1.0, height=1.0)
-screen.title("Better console")
+screen.title("Better console - by tobble")
 screen._root.state('zoomed')
 screen.bgcolor("black")
 
@@ -25,12 +24,13 @@ turtleYpos = 480
 
 COLOR_MAP = {
     "red": "#ff3333",
+    "orange": "#ff9933",
+    "yellow": "#ffff33",
     "green": "#33ff33",
     "blue": "#3399ff",
-    "yellow": "#ffff33",
-    "white": "#ffffff",
-    "orange": "#ff9933",
+    "pink": "#FF9999",
     "purple": "#cc66ff",
+    "white": "#ffffff",
     "grey": "#555555"
 }
 
@@ -74,9 +74,9 @@ def write(text, speed=0.01):
             if ch == "W":
                 spacing = 20
             elif ch.isupper() and next_ch != " ":
-                spacing = 12 if ch not in ["I"] else 6
+                spacing = 14 if ch not in ["I"] else 6
             elif ch in ["l", "t", "r", "f", "i", "j", "'"]:
-                spacing = 6
+                spacing = 7
             elif ch in ["w", "m"]:
                 spacing = 17
             else:
@@ -90,10 +90,11 @@ def write(text, speed=0.01):
 askoutput = ""
 
 def ask(txt, speed=0.01):
-    write(txt, speed)
+    write(txt, speed)   
     return askstring('input', 'enter input')
 
 def howto():
+    print("----------------------------------------")
     print("Thank you for using better console by tobble © 2025.")
     print("----------------------------------------")
     print("To print text, use 'betterconsole.write(text, speed)'.")
@@ -101,10 +102,12 @@ def howto():
     print("----------------------------------------")
     print("To use colours and styles in text, use '@colour-' or '@style-'")
     print("----------------------------------------")
-    print("Colours: @red-, @orange-, @yellow-, @green-, @blue-, @purple-, @white-, @grey-.")
+    print("Colours: @red-, @orange-, @yellow-, @green-, @blue-, @pink-, @purple-, @white-, @grey-.")
     print("styles: @bold-, @italic-, @underline-, @normal-.")
+    print("----------------------------------------")
     
 howto()
 write("@grey-Better console by tobble. © 2025.", 0)
+sleep(0.5)
 turtle.clear()
 turtleYpos = 480
