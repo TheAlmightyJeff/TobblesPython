@@ -20,7 +20,12 @@ turtle = Turtle()
 turtle.hideturtle()
 turtle.penup()
 
-turtleYpos = 480
+#change the default positions to adjust to your screen size.
+#this current setup is for 1080p (i think...)
+tYpos_default = 480
+tXpos_default = -960
+
+turtleYpos = tYpos_default
 
 COLOR_MAP = {
     "red": "#ff3333",
@@ -43,7 +48,7 @@ STYLE_MAP = {
 
 def write(text, speed=0.01):
     global turtleYpos
-    turtle.setpos(-950, turtleYpos)
+    turtle.setpos(tXpos_default, turtleYpos)
     current_color = "white"
     current_style = "normal"
     turtle.color(current_color)
@@ -110,4 +115,4 @@ howto()
 write("@grey-Better console by tobble. © 2025.", 0)
 sleep(0.5)
 turtle.clear()
-turtleYpos = 480
+turtleYpos = tYpos_default
