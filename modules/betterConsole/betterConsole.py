@@ -49,6 +49,10 @@ STYLE_MAP = {
     "normal": "normal"
 }
 
+EMOJI_MAP = {
+    "test": "test.gif"
+}
+
 def write(text, speed=0.01):
     global turtleYpos
     turtle.setpos(tXpos_default, turtleYpos)
@@ -67,6 +71,11 @@ def write(text, speed=0.01):
                 turtle.color(current_color)
             elif code in STYLE_MAP:
                 current_style = STYLE_MAP[code]
+            elif code in EMOJI_MAP:
+                emoji = EMOJI_MAP[code]
+                screen.register_shape(emoji)
+                turtle.shape(emoji)
+                turtle.stamp()
             continue
 
         for i in range(len(part)):
