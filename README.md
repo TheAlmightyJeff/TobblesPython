@@ -1,4 +1,4 @@
-# TobblesPython
+# TobblesPython ![logo](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
 A collection of all my python stuff - please dont change and redistribute as your own!
 
 ## Better console
