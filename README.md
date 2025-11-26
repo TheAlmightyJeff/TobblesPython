@@ -4,6 +4,7 @@ A collection of all my python stuff - please dont change and redistribute as you
 ## Better console
 
 ### Functions:
+---
 
 write(text, speed)
 
@@ -21,7 +22,10 @@ hold()
 
 prevents the screen from closing after everything else has finished running. you dont always need it for some reason.
 
+---
+
 ### Styles:
+---
 To use colours and styles, use @colour- or @style-
 
 Colours: @red-, @orange-, @yellow-, @green-, @blue-, @pink-, @purple-, @white-, @grey-. 
@@ -29,4 +33,6 @@ Colours: @red-, @orange-, @yellow-, @green-, @blue-, @pink-, @purple-, @white-, 
 Styles: @bold-, @italic-, @underline-, @normal-.
 
 More can be added if you wish to customise more.
+
+---
 
