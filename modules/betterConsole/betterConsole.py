@@ -3,7 +3,7 @@
 #© 2025 - do not redistribute
 #----------------------------
 
-#Recent edits: improved spacing and added more adjustable screen sizes. not auto bc i dont know how :/
+#Recent edits: IMAGE EMOJI!!!! improved spacing and added more adjustable screen sizes. not auto bc i dont know how :/
 
 from turtle import Screen, Turtle
 from time import sleep
@@ -11,6 +11,7 @@ import re
 
 from tkinter.simpledialog import askstring
 from tkinter.messagebox import showinfo
+from tkinter import PhotoImage
 
 screen = Screen()
 screen.setup(width=1.0, height=1.0)
@@ -72,7 +73,8 @@ def write(text, speed=0.01):
             elif code in STYLE_MAP:
                 current_style = STYLE_MAP[code]
             elif code in EMOJI_MAP:
-                emoji = EMOJI_MAP[code]
+                emoji = PhotoImage(file=EMOJI_MAP[code])
+                emoji = PhotoImage.subsample(32)
                 screen.register_shape(emoji)
                 turtle.shape(emoji)
                 turtle.stamp()
@@ -139,3 +141,4 @@ write("@grey-Better console by tobble. © 2025.", 0)
 sleep(0.5)
 turtle.clear()
 turtleYpos = tYpos_default
+
