@@ -1,35 +1,42 @@
 #----------------------------
-#Better Console - V1.0.1
-#© 2025 - do not redistribute
+# Better Console - V1.0.1
+# © 2025 - do not redistribute
 #----------------------------
-
-#Recent edits: IMAGE EMOJI!!!! improved spacing and added more adjustable screen sizes. not auto bc i dont know how :/
+# Recent edits: Better fullscreen mode, spacing better, code structure revamp and private varibles.
+#----------------------------
 
 from turtle import Screen, Turtle
 from time import sleep
 import re
 
+
+import tkinter
 from tkinter.simpledialog import askstring
 from tkinter.messagebox import showinfo
-from tkinter import PhotoImage
 
-screen = Screen()
-screen.setup(width=1.0, height=1.0)
-screen.title("Better console - by tobble")
-screen._root.state('zoomed')
-screen.bgcolor("black")
+__all__ = ["write", "ask", "hold", "customise"]
 
-turtle = Turtle()
-turtle.hideturtle()
-turtle.penup()
+_screen = Screen()
+_root = _screen._root
+_screen.setup(width=1.0, height=1.0)
+_root.state('zoomed')
 
-#change the default positions to adjust to your screen size.
-#this current setup is for 1080p (i think...)
+_canvas = _screen.getcanvas()
+_canvas.config(highlightthickness=0.0, bd=1, bg="black")
 
-tYpos_default = 470
-tXpos_default = -950
+_root.resizable(False, False)
 
-turtleYpos = tYpos_default
+_root.update()
+
+# -----------------------------------------------------
+# Customise these if you want
+# -----------------------------------------------------
+
+_screen.title("Better console - by tobble")
+_screen.bgcolor("black")
+
+width_Padding = 20
+Hight_Padding = 40
 
 COLOR_MAP = {
     "red": "#ff3333",
@@ -50,16 +57,31 @@ STYLE_MAP = {
     "normal": "normal"
 }
 
-EMOJI_MAP = {
-    "test": "test.gif"
-}
+# ----------------------------------------------------------
+# DO NOT EDIT UNDER HERE UNLESS YOU KNOW WHAT YOUR DOING :)
+# ----------------------------------------------------------
+
+_screen.update()
+_width = _screen.window_width()
+_height = _screen.window_height()
+
+tXpos_default = -_width // 2 + width_Padding
+tYpos_default =  _height // 2 - Hight_Padding
+
+_turtle = Turtle()
+_turtle.hideturtle()
+_turtle.penup()
+_turtle.speed(9999)
+
+_turtleYpos = tYpos_default
+
 
 def write(text, speed=0.01):
-    global turtleYpos
-    turtle.setpos(tXpos_default, turtleYpos)
+    global _turtleYpos
+    _turtle.setpos(tXpos_default, _turtleYpos)
     current_color = "white"
     current_style = "normal"
-    turtle.color(current_color)
+    _turtle.color(current_color)
 
     parts = re.split(r'(@\w+-)', text)
 
@@ -69,21 +91,15 @@ def write(text, speed=0.01):
             code = match.group(1).lower()
             if code in COLOR_MAP:
                 current_color = COLOR_MAP[code]
-                turtle.color(current_color)
+                _turtle.color(current_color)
             elif code in STYLE_MAP:
                 current_style = STYLE_MAP[code]
-            elif code in EMOJI_MAP:
-                emoji = PhotoImage(file=EMOJI_MAP[code])
-                emoji = PhotoImage.subsample(32)
-                screen.register_shape(emoji)
-                turtle.shape(emoji)
-                turtle.stamp()
             continue
 
         for i in range(len(part)):
             ch = part[i]
             next_ch = part[i+1] if i + 1 < len(part) else ""
-            turtle.write(ch, font=('Arial', 16, current_style))
+            _turtle.write(ch, font=('Arial', 16, current_style))
 
             if ch in [".", "!"]:
                 sleep(0.5)
@@ -101,25 +117,33 @@ def write(text, speed=0.01):
             elif ch in ["t", "f"]:
                 spacing = 7
             elif ch in ["l", "i", "j", "'"]:
-                spacing = 4
+                spacing = 5
             elif ch in ["w", "m"]:
                 spacing = 16
+            elif ch in ["@"]:
+                spacing = 20
             else:
                 spacing = 11
 
             if current_style == "bold":
-                spacing = spacing + 1
+                spacing += 1
             
-            turtle.forward(spacing)
+            _turtle.forward(spacing)
 
-    _, y = turtle.position()
-    turtleYpos = y - 30
+    _, y = _turtle.position()
+    _turtleYpos = y - 30
 
-askoutput = ""
 
 def ask(txt, speed=0.01):
-    write(txt, speed)   
+    write(txt, speed)
     return askstring('input', 'enter input')
+
+def hold():
+    _screen.mainloop()
+
+def customise(bgCol=None, title=None):
+    _screen.title(title)
+    _screen.bgcolor(bgCol)
 
 def howto():
     print("----------------------------------------")
@@ -133,12 +157,12 @@ def howto():
     print("Colours: @red-, @orange-, @yellow-, @green-, @blue-, @pink-, @purple-, @white-, @grey-.")
     print("styles: @bold-, @italic-, @underline-, @normal-.")
     print("----------------------------------------")
-    print("More styles and colours can be added in the code under the 'COLOUR_MAP' and 'STYLE_MAP' at the top.")
+    print("More styles and colours can be added in the code under the 'COLOUR_MAP' and 'STYLE_MAP'.")
     print("----------------------------------------")
-    
+
+
 howto()
 write("@grey-Better console by tobble. © 2025.", 0)
 sleep(0.5)
-turtle.clear()
-turtleYpos = tYpos_default
-
+_turtle.clear()
+_turtleYpos = tYpos_default

@@ -1,5 +1,7 @@
 import betterConsole as bc
 
+bc.customise(bgCol="green", title="Better Console - DEMO!!!") #To stop the bg from changing, just remove 'bgCol="Green"'
+
 bc.write("@green-Welcome... To @yellow-better console!", 0.01)
 bc.write("@green-Better console is a module developed by @yellow-@bold-tobble.")
 bc.write("@green-It is turtle based and can be used in the same way the normal console can just with more @italic-@orange-customisation!")
@@ -8,4 +10,4 @@ bc.write(f"@green-You inputed @purple-@bold-{ask1}!")
 bc.write("@green-Use 'f' strings ^^^^")
 bc.write("@green-And @blue-@underline-so.@normal- @red-@bold-much. @purple-@italic-MORE!!!")
 
-bc.screen.mainloop()
+bc.hold() #somties you need this idk why, stops the window from closing lol
