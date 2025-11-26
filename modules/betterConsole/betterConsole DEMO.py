@@ -1,6 +1,6 @@
 import betterConsole as bc
 
-bc.customise(bgCol="green", title="Better Console - DEMO!!!") #To stop the bg from changing, just remove 'bgCol="Green"'
+bc.customise(bgCol="black", title="Better Console - DEMO!!!")
 
 bc.write("@green-Welcome... To @yellow-better console!", 0.01)
 bc.write("@green-Better console is a module developed by @yellow-@bold-tobble.")
