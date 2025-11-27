@@ -95,6 +95,7 @@ def write(text, speed=0.01):
                 current_style = STYLE_MAP[code]
             continue
 
+        _wrap()
         for i in range(len(part)):
             ch = part[i]
             next_ch = part[i+1] if i + 1 < len(part) else ""
@@ -104,8 +105,6 @@ def write(text, speed=0.01):
                 sleep(0.5)
             else:
                 sleep(speed)
-                
-            x, _ = _turtle.position()
 
             if ch in ["W", "M"]:
                 spacing = 20
@@ -165,6 +164,15 @@ def _newline():
     global _turtleYpos
     _, y = _turtle.position()
     _turtleYpos = y - 30
+
+def _wrap():
+    x, _ = _turtle.position()
+    print(f"testing wrap {x}")
+    if x > 100:
+        print("wrapping...")
+        _turtleYpos = _tYpos_default
+        _turtle.setpos(_tXpos_default, _turtleYpos)
+        
     
     
 def howto():
@@ -186,4 +194,3 @@ howto()
 write("@grey-Better console by tobble. © 2025.", 0)
 sleep(0.5)
 reset()
-
