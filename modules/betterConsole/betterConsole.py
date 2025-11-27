@@ -14,7 +14,7 @@ import tkinter
 from tkinter.simpledialog import askstring
 from tkinter.messagebox import showinfo
 
-__all__ = ["write", "ask", "hold", "customise"]
+__all__ = ["write", "ask", "hold", "customise", "reset"]
 
 _screen = Screen()
 _root = _screen._root
@@ -65,20 +65,20 @@ _screen.update()
 _width = _screen.window_width()
 _height = _screen.window_height()
 
-tXpos_default = -_width // 2 + width_Padding
-tYpos_default =  _height // 2 - Hight_Padding
+_tXpos_default = -_width // 2 + width_Padding
+_tYpos_default =  _height // 2 - Hight_Padding
 
 _turtle = Turtle()
 _turtle.hideturtle()
 _turtle.penup()
 _turtle.speed(9999)
 
-_turtleYpos = tYpos_default
+_turtleYpos = _tYpos_default
 
 
 def write(text, speed=0.01):
     global _turtleYpos
-    _turtle.setpos(tXpos_default, _turtleYpos)
+    _turtle.setpos(_tXpos_default, _turtleYpos)
     current_color = "white"
     current_style = "normal"
     _turtle.color(current_color)
@@ -145,6 +145,11 @@ def customise(bgCol=None, title=None):
     _screen.title(title)
     _screen.bgcolor(bgCol)
 
+def reset():
+    _turtle.clear()
+    _turtleYpos = _tYpos_default
+    
+    
 def howto():
     print("----------------------------------------")
     print("Thank you for using better console by tobble © 2025.")
@@ -165,4 +170,4 @@ howto()
 write("@grey-Better console by tobble. © 2025.", 0)
 sleep(0.5)
 _turtle.clear()
-_turtleYpos = tYpos_default
+_turtleYpos = _tYpos_default
