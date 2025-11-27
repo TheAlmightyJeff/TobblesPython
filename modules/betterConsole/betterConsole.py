@@ -2,38 +2,13 @@
 # Better Console - V1.0.1
 # © 2025 - do not redistribute
 #----------------------------
-# Recent edits: Better fullscreen mode, spacing better, code structure revamp and private varibles.
+# Recent edits: more useful funcs, Better fullscreen mode, spacing better, code structure revamp and private varibles.
+#----------------------------
+#Edit these values if u want
 #----------------------------
 
-from turtle import Screen, Turtle
-from time import sleep
-import re
-
-
-import tkinter
-from tkinter.simpledialog import askstring
-from tkinter.messagebox import showinfo
-
-__all__ = ["write", "ask", "hold", "customise", "reset", "byebye"]
-
-_screen = Screen()
-_root = _screen._root
-_screen.setup(width=1.0, height=1.0)
-_root.state('zoomed')
-
-_canvas = _screen.getcanvas()
-_canvas.config(highlightthickness=0.0, bd=1, bg="black")
-
-_root.resizable(False, False)
-
-_root.update()
-
-# -----------------------------------------------------
-# Customise these if you want
-# -----------------------------------------------------
-
-_screen.title("Better console - by tobble")
-_screen.bgcolor("black")
+screenTitle = "Better console - by tobble"
+screemColour = "black"
 
 width_Padding = 20
 Hight_Padding = 40
@@ -61,6 +36,32 @@ STYLE_MAP = {
 # DO NOT EDIT UNDER HERE UNLESS YOU KNOW WHAT YOUR DOING :)
 # ----------------------------------------------------------
 
+
+from turtle import Screen, Turtle
+from time import sleep
+import re
+
+import tkinter
+from tkinter.simpledialog import askstring
+from tkinter.messagebox import showinfo
+
+__all__ = ["write", "ask", "hold", "customise", "reset", "byebye"]
+
+_screen = Screen()
+_root = _screen._root
+_screen.setup(width=1.0, height=1.0)
+_root.state('zoomed')
+
+_canvas = _screen.getcanvas()
+_canvas.config(highlightthickness=0.0, bd=1, bg="black")
+
+_root.resizable(False, False)
+
+_root.update()
+
+_screen.title(screenTitle)
+_screen.bgcolor("black")
+ 
 _screen.update()
 _width = _screen.window_width()
 _height = _screen.window_height()
@@ -95,7 +96,6 @@ def write(text, speed=0.01):
                 current_style = STYLE_MAP[code]
             continue
 
-        _wrap()
         for i in range(len(part)):
             ch = part[i]
             next_ch = part[i+1] if i + 1 < len(part) else ""
@@ -130,6 +130,9 @@ def write(text, speed=0.01):
             
             _turtle.forward(spacing)
 
+            if _turtle.xcor() > (_width // 2 - width_Padding):
+                _newline()
+
     _newline()
 
 def ask(txt, speed=0.01):
@@ -144,7 +147,6 @@ def customise(bgCol=None, title=None):
         pass
     else:
         _screen.bgcolor(bgCol)
-
     if title == None:
         pass
     else:
@@ -164,18 +166,9 @@ def _newline():
     global _turtleYpos
     _, y = _turtle.position()
     _turtleYpos = y - 30
+    _turtle.setpos(_tXpos_default, _turtleYpos)
 
-def _wrap():
-    x, _ = _turtle.position()
-    print(f"testing wrap {x}")
-    if x > 100:
-        print("wrapping...")
-        _turtleYpos = _tYpos_default
-        _turtle.setpos(_tXpos_default, _turtleYpos)
-        
-    
-    
-def howto():
+def _howto():
     print("----------------------------------------")
     print("Thank you for using better console by tobble © 2025.")
     print("----------------------------------------")
@@ -190,7 +183,7 @@ def howto():
     print("More styles and colours can be added in the code under the 'COLOUR_MAP' and 'STYLE_MAP'.")
     print("----------------------------------------")
 
-howto()
+_howto()
 write("@grey-Better console by tobble. © 2025.", 0)
 sleep(0.5)
 reset()
