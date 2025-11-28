@@ -30,6 +30,10 @@ byebye()
 
 exits better console.
 
+waitEnter()
+
+waits for an enter key input.
+
 ---
 
 ### Styles:
