@@ -38,9 +38,12 @@ _defaultPause = 0.5
 # DO NOT EDIT UNDER HERE UNLESS YOU KNOW WHAT YOUR DOING :)
 # ----------------------------------------------------------
 
-from turtle import Screen, Turtle
+from turtle import Turtle, Screen
+import turtle
 from time import sleep
 import re
+
+import sys
 
 import tkinter
 from tkinter.simpledialog import askstring
@@ -71,7 +74,7 @@ _tXpos_default = -_width // 2 + width_Padding
 _tYpos_default =  _height // 2 - Hight_Padding
 
 _turtle = Turtle()
-#_turtle.hideturtle()
+_turtle.hideturtle()
 _turtle.penup()
 _turtle.speed(0)
 
@@ -168,7 +171,20 @@ def reset():
 def byebye():
     _screen.bye()
     exit()
-    
+
+def waitEnter():
+    write("@grey-Click enter to continue")
+    done = False
+    def _pressed():
+        nonlocal done
+        done = True
+
+    _screen.onkey(_pressed, "Return")
+    _screen.listen()
+
+    while not done:
+        _screen.update()
+        
 def _newline():
     global _turtleYpos
     _, y = _turtle.position()
