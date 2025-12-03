@@ -36,6 +36,8 @@ wait()
 
 Pauses untill it detects an enter key input.
 
+REQUIRES TOMLLIB. IF THE MODULE IS NOT INSTALLED, FONT CHANGES WILL NOT BE AVAILABLE.
+
 ---
 
 ### Styles:
