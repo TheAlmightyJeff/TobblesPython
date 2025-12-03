@@ -1,5 +1,5 @@
 #----------------------------
-# Better Console - V1.0.1
+# Better Console - V1.1.2
 # © 2025 - do not redistribute
 #----------------------------
 # Recent edits: more useful funcs, Better fullscreen mode, spacing better, code structure revamp and private varibles.
