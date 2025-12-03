@@ -1,5 +1,5 @@
 #----------------------------
-# Better Console - V1.1.2
+# Better Console - V1.0.1
 # © 2025 - do not redistribute
 #----------------------------
 # Recent edits: more useful funcs, Better fullscreen mode, spacing better, code structure revamp and private varibles.
@@ -55,7 +55,7 @@ try:
     import tomllib
 except ImportError:
     print("TOMLLIB NOT FOUND, FALLING BACK TO DEFAULT FONT. FONT CHANGES WILL NOT WORK.")
-    _TOMLLIB_WORKS = False
+    _TOMLLIB = False
 
 
 import os
@@ -96,11 +96,12 @@ def load_font_rules():
     with open(path, "rb") as f:
         return tomllib.load(f)
 
-FONT_RULES = load_font_rules()
+if _TOMLLIB == True:
+    FONT_RULES = load_font_rules()
 _currentFont = "Arial"
 
 def write(text, speed=0.01):
-    global _turtleYpos
+    global _turtleYpos, spacing
     _turtle.setpos(_tXpos_default, _turtleYpos)
     current_color = "white"
     current_style = "normal"
@@ -139,25 +140,49 @@ def write(text, speed=0.01):
             else:
                 sleep(speed)
 
-            rules = FONT_RULES.get(_currentFont, {})
-            default_spacing = rules.get("default", 11)
-            caps_spacing = rules.get("caps")
-            overrides = rules.get("override", {})
+            if _TOMLLIB == True:
+                rules = FONT_RULES.get(_currentFont, {})
+                default_spacing = rules.get("default", 11)
+                caps_spacing = rules.get("caps")
+                overrides = rules.get("override", {})
 
-            if ch in overrides:
-                spacing = overrides[ch]
-            elif ch.isupper() and caps_spacing is not None:
-                spacing = caps_spacing
-            else:
-                spacing = default_spacing
+                if ch in overrides:
+                    spacing = overrides[ch]
+                elif ch.isupper() and caps_spacing is not None:
+                    spacing = caps_spacing
+                else:
+                    spacing = default_spacing
 
-            if current_style == "bold":
-                spacing += 1
-                        
-            _turtle.forward(spacing)
+                if current_style == "bold":
+                    spacing += 1
+                    
+                else: #FALLBACK IF TOMLLIB NOT FOUND
+                    if ch in ["W", "M"]:
+                        spacing = 20
+                    elif ch.isupper() and next_ch != " ":
+                        spacing = 14 if ch not in ["I"] else 6
+                    elif ch in ["o"]:
+                        spacing = 12
+                    elif ch in ["r"]:
+                        spacing = 8
+                    elif ch in ["t", "f"]:
+                        spacing = 7
+                    elif ch in ["l", "i", "j", "'"]:
+                        spacing = 5
+                    elif ch in ["w", "m"]:
+                        spacing = 16
+                    elif ch in ["@"]:
+                        spacing = 20
+                    else:
+                        spacing = 11
+
+                    if current_style == "bold":
+                        spacing += 1
 
             if _turtle.xcor() > (_width // 2 - width_Padding):
                 _newline()
+        _turtle.forward(spacing)
+                    
 
     sleep(_defaultPause)
     _newline()
@@ -185,7 +210,7 @@ def customise(bgCol=None, title=None, pauseAfterWrite=None, font=None):
         _defaultPause = pauseAfterWrite
     if font == None:
         pass
-    else:
+    elif TOMLLIB == True:
         FONT_RULES = load_font_rules()
         _currentFont = font
 
@@ -214,12 +239,18 @@ def wait():
 def _newline():
     global _turtleYpos
 
-    rules = FONT_RULES.get(_currentFont, {})
-    newline_spacing = rules.get("newline", 30)
-
-    _, y = _turtle.position()
-    _turtleYpos = y - newline_spacing
-    _turtle.setpos(_tXpos_default, _turtleYpos)
+    if _TOMLLIB == True:
+        rules = FONT_RULES.get(_currentFont, {})
+        newline_spacing = rules.get("newline", 30)
+        
+        _, y = _turtle.position()
+        _turtleYpos = y - newline_spacing
+        _turtle.setpos(_tXpos_default, _turtleYpos)
+        
+    else:
+        _, y = _turtle.position()
+        _turtleYpos = y - 30
+        _turtle.setpos(_tXpos_default, _turtleYpos)
 
 def _howto():
     print("----------------------------------------")
@@ -240,3 +271,4 @@ _howto()
 write("@grey-Better console by tobble. © 2025.", 0)
 sleep(0.5)
 reset()
+
