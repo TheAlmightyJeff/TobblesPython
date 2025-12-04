@@ -274,4 +274,4 @@ def _howto():
 _howto()
 write("@grey-Better console by tobble. © 2025.", 0)
 sleep(0.5)
-reset()
+clear()
