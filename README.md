@@ -3,6 +3,10 @@ A collection of all mine and some friends python stuff - please dont change and 
 
 ## Better console
 
+requires tkinter, Turtle and TOMLLIB is recommended, but not required.
+
+If the TOMLLIB is not installed, fontchanges will not be available.
+
 ### Functions:
 ---
 
@@ -35,8 +39,6 @@ exits better console.
 wait()
 
 Pauses untill it detects an enter key input.
-
-REQUIRES TOMLLIB. IF THE MODULE IS NOT INSTALLED, FONT CHANGES WILL NOT BE AVAILABLE.
 
 ---
 
