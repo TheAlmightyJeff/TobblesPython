@@ -1,8 +1,8 @@
 #----------------------------
-# Better Console - V1.0.1
+# Better Console
 # © 2025 - do not redistribute
 #----------------------------
-# Recent edits: more useful funcs, Better fullscreen mode, spacing better, code structure revamp and private varibles.
+_LOCAL_VERSION = "2.6"
 #----------------------------
 #Edit these, if u want
 #----------------------------
@@ -49,6 +49,10 @@ import tkinter
 from tkinter.simpledialog import askstring
 from tkinter.messagebox import showinfo
 
+import urllib.request
+
+import os
+
 _TOMLLIB = True
 
 try:
@@ -57,8 +61,6 @@ except ImportError:
     print("TOMLLIB NOT FOUND, FALLING BACK TO DEFAULT FONT. FONT CHANGES WILL NOT WORK.")
     _TOMLLIB = False
 
-
-import os
 
 __all__ = ["write", "ask", "hold", "customise", "reset", "byebye", "wait"]
 
@@ -90,6 +92,22 @@ _turtle.penup()
 _turtle.speed(0)
 
 _turtleYpos = _tYpos_default
+
+
+def _verify_version():
+    
+    #---please dont edit this! its so you can tell if a new version is on the github.---
+    
+    url = "https://raw.githubusercontent.com/TheAlmightyJeff/TobblesPythonCollection/refs/heads/main/versions/betterConsole.txt"
+
+    with urllib.request.urlopen(url) as f:
+        _LATEST_VERSION = f.read().decode().strip()
+
+    print(f"script version: {_LOCAL_VERSION}")
+    print(f"newest version: {_LATEST_VERSION}")
+    
+    if _LATEST_VERSION != _LOCAL_VERSION:
+        print("OUTDATED VERSION. PLEASE UPDATE")
 
 def _load_font_rules():
     path = os.path.join(os.path.dirname(__file__), "font_rules.toml")
@@ -225,10 +243,10 @@ def customise(bgCol=None, title=None, pauseAfterWrite=None, font=None):
         _defaultPause = pauseAfterWrite
     if font == None:
         pass
-    if _TOMLLIB == False:
+    elif _TOMLLIB == False:
         print("TOMLLIB NOT FOUND, FALLING BACK TO DEFAULT FONT. FONT CHANGES WILL NOT WORK.")
     elif _TOMLLIB == True:
-        FONT_RULES = load_font_rules()
+        FONT_RULES = _load_font_rules()
         _currentFont = font
 
 def clear():
@@ -285,6 +303,7 @@ def _howto():
     print("----------------------------------------")
 
 _howto()
+_verify_version()
 write("@grey-Better console by tobble. © 2025.", 0)
 sleep(0.5)
 clear()
