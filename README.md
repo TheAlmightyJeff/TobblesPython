@@ -36,9 +36,9 @@ byebye()
 
 exits better console.
 
-wait()
+wait(msg)
 
-Pauses untill it detects an enter key input.
+Pauses untill it detects an enter key input. msg will take a mesage, but not speed.
 
 ---
 
