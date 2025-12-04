@@ -91,16 +91,20 @@ _turtle.speed(0)
 
 _turtleYpos = _tYpos_default
 
-def load_font_rules():
+def _load_font_rules():
     path = os.path.join(os.path.dirname(__file__), "font_rules.toml")
     with open(path, "rb") as f:
         return tomllib.load(f)
 
 if _TOMLLIB == True:
-    FONT_RULES = load_font_rules()
+    FONT_RULES = _load_font_rules()
 _currentFont = "Arial"
 
 def write(text, speed=0.01):
+    """
+    writes text to the screen. use styles and colours with '@style-' or '@colour-'.
+    find colours in the github or in the console output.
+    """
     global _turtleYpos, spacing
     _turtle.setpos(_tXpos_default, _turtleYpos)
     current_color = "white"
@@ -190,14 +194,23 @@ def write(text, speed=0.01):
     _newline()
 
 def ask(txt, speed=0.01):
+    """
+    takes an input using a msg box. text can use styles and colours like 'write()'
+    """
     write(txt, speed)
     return askstring('input', 'enter input')
 
 def hold():
+    """
+    finish code. stops screen from closing.
+    """
     _screen.mainloop()
 
 def customise(bgCol=None, title=None, pauseAfterWrite=None, font=None):
-    global _currentFont, _defaultPause, FONT_RULES  # <-- add this
+    """
+    customises the screen and fonts and defaults.
+    """
+    global _currentFont, _defaultPause, FONT_RULES
     if bgCol == None:
         pass
     else:
@@ -228,8 +241,8 @@ def byebye():
     _screen.bye()
     exit()
 
-def wait():
-    write("@grey-Click enter to continue", 0)
+def wait(text="@grey-Click enter to continue"):
+    write(text, 0)
     done = False
     def _pressed():
         nonlocal done
