@@ -12,7 +12,7 @@ bc.write("@green-Use 'f' strings ^^^^")
 bc.customise(font="Comic Sans MS")
 bc.write("@green-Change fonts (goofy comic sans!)")
 bc.customise(font="Arial")
-#bc.write("@#CCCCFF-New! hex colours supported!")
+bc.write("@#CCCCFF-New! hex colours supported!")
 bc.write("@green-And @blue-@underline-so.@normal- @red-@bold-much. @purple-@italic-MORE!!!")
 
 bc.hold()
