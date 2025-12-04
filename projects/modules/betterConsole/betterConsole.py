@@ -218,7 +218,7 @@ def customise(bgCol=None, title=None, pauseAfterWrite=None, font=None):
         FONT_RULES = load_font_rules()
         _currentFont = font
 
-def reset():
+def clear():
     global _turtleYpos
     _turtle.clear()
     _turtleYpos = _tYpos_default
