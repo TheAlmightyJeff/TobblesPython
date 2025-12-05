@@ -2,7 +2,7 @@
 # Better Console
 # © 2025 - do not redistribute
 #----------------------------
-_LOCAL_VERSION = "2.6" # dont edit this :)
+_LOCAL_VERSION = "2.6.1" # dont edit this :)
 #----------------------------
 #Edit these, if u want
 #----------------------------
