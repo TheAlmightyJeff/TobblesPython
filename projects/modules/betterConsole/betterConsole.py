@@ -35,7 +35,7 @@ STYLE_MAP = {
 _defaultPause = 0.5
 
 # ----------------------------------------------------------
-# DO NOT EDIT UNDER HERE UNLESS YOU KNOW WHAT YOUR DOING :)
+# DO NOT EDIT UNDER HERE UNLESS YOU KNOW WHAT YOU'RE DOING :)
 # ----------------------------------------------------------
 
 from turtle import Turtle, Screen
