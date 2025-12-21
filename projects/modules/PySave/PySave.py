@@ -8,7 +8,7 @@
 #-----------------------------------
 #Edit these, if you want
 #-----------------------------------
-
+5
 # Should the data be encrypted?
 # If you already have data it will change to encryption but not back!
 # Its also not millitary grade or anything, so don't store super sensitive data.
@@ -120,7 +120,8 @@ def readData(varName):
 
 
 def delData(varName):
-    """Delete encrypted variable name and value. CANNOT BE UNDONE."""
+    
+    """Delete variable name and value, even if encrypted. CANNOT BE UNDONE."""
 
     key = _enc(varName)
 
@@ -149,3 +150,5 @@ def delData(varName):
 
 
 _Createfile()
+writeData("hello", "1234567890")
+print(readData("hello"))
