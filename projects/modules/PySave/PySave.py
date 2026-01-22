@@ -1,6 +1,6 @@
 # ----------------------------
 # PYSave by Tobble
-# © 2025 - do not redistribute
+# © 2026 - do not redistribute
 # ----------------------------
 
 # VERSION: BETA (things will change)
